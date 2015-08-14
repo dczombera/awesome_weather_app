@@ -3,7 +3,7 @@
     <%= @location.city %>
 </p>
 <p>
-  <strong>Country Code:</strong>
+  <strong>Country:</strong>
   <%= @location.country %>
 </p>
 <p>
@@ -21,4 +21,7 @@
 <p>
   <strong>Wind speed:</strong>
   <%= @location.wind_speed %>
+</p>
+<p>
+  <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@location.latitude}%2C#{@location.longitude}" %>
 </p>

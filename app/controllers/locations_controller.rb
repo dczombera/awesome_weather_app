@@ -2,15 +2,15 @@ class LocationsController < ApplicationController
   include LocationHelper
 
   # Constants
-  URL_BASE = "http://api.openweathermap.org/data/2.5/weather/"
+  URL_BASE = "http://api.openweathermap.org/data/2.5/weather"
 
   def index
   end
 
   def create
     if params[:commit] == 'Search' && params[:location][:city].blank?
-      flash.now[:danger] = "You have to give me at least the name of a city if you want to know the weather, young padawan."
-      render 'index'
+      flash[:danger] = "You have to give me at least the name of a city if you want to know the weather, young padawan."
+      redirect_to root_url
       return
     end
 
@@ -28,13 +28,13 @@ class LocationsController < ApplicationController
     end
     # We assume the city was not found because we didn't particularly check for a response code of 404
     if @location.nil?
-      flash.now[:danger] = "Sorry, my friend. I did my best but I couldn't find the city."
-      render 'index'
+      flash[:danger] = "Sorry, my friend. I did my best but I couldn't find the city."
+      redirect_to root_url
     elsif @location.save
-      render partial: 'location', object: @location
+      render :index
     else
       flash.now[:danger] = "Seems like something went wrong while saving to our database. Please try again!"
-      render 'index'
+      redirect_to root_url
     end
   end
 

@@ -5,7 +5,7 @@ module LocationHelper
   def build_location(attr={})
     Location.new(
         city: attr["name"],
-        country: attr["sys"]["country"],
+        country: Country[attr["sys"]["country"]],
         latitude: attr["coord"]["lat"],
         longitude: attr["coord"]["lon"],
         description: attr["weather"].first["description"],

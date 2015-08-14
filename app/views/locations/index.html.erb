@@ -13,3 +13,11 @@
     <% end %>
   </div>
 </div>
+
+<% unless @location.nil?   %>
+    <div class="search_result">
+      <div class="col-md-6 col-md-offset-3">
+        <%= render 'location' %>
+      </div>
+    </div>
+<% end %>
