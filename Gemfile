@@ -38,7 +38,7 @@ group :development, :test do
   gem 'web-console', '~> 2.0'           # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'spring'                          # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'faker'                           # Generates all kinds of useful stuff for testing, e.g. IP/MAC addresses
-  gem 'geocoder'                        # Geolocation solution for ruby
+  gem 'httparty'                        # Let's get the http party started!
 end
 
 group :development do
