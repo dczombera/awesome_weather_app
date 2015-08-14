@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  get 'location/index'
+  root 'locations#index'
 
-  get 'location/create'
+  get 'locations/create'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

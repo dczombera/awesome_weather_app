@@ -1,5 +1,5 @@
 class Location < ActiveRecord::Base
-  store_accesor :weather,
+  store_accessor :weather, :description, :temp, :humidity, :wind_speed
 
   validates_presence_of :city, :country, :latitude, :longitude
 

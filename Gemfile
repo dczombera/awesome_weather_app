@@ -41,6 +41,10 @@ group :development, :test do
   gem 'httparty'                        # Let's get the http party started!
 end
 
+group :test do
+  gem 'shoulda-matchers', require: false # Shortcuts for testing model validations and more
+end
+
 group :development do
   gem 'guard-rspec'                       # Watches code files & executes tests
 end
