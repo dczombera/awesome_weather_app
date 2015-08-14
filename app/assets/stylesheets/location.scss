@@ -21,5 +21,24 @@ input {
   height: auto !important
 }
 
+/* search history side bar */
+
+.search_history {
+  list-style: none;
+  margin: 0;
+  li {
+    overflow: auto;
+  }
+}
+
+.history_record {
+  padding: 10px 0;
+  border-bottom: 1px solid $gray-lighter;
+}
+
+/* Google maps */
+.maps {
+  margin-top: 15px;
+}
 
 

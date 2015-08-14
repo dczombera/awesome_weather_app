@@ -14,4 +14,8 @@ module LocationHelper
         wind_speed: attr["wind"]["speed"]
         )
   end
+
+  def get_search_history(limit=5)
+    Location.order('created_at DESC').limit(limit)
+  end
 end

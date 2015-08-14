@@ -31,6 +31,8 @@ class LocationsController < ApplicationController
       flash[:danger] = "Sorry, my friend. I did my best but I couldn't find the city."
       redirect_to root_url
     elsif @location.save
+      # Get last search results used in view
+      @history = get_search_history
       render :index
     else
       flash.now[:danger] = "Seems like something went wrong while saving to our database. Please try again!"

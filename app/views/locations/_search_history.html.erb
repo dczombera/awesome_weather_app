@@ -1,0 +1,12 @@
+<h3> Last recent search results</h3>
+<ul class="search_history">
+    <% unless @history.nil? %>
+        <% @history.each do |record| %>
+          <div class="history_record">
+            <li><%= "City: #{record.city}" %></li>
+            <li><%= "Country: #{record.country}" %></li>
+            <li><%= "Temperature: #{record.temp}" %></li>
+          </div>
+        <% end %>
+    <% end %>
+</ul>
