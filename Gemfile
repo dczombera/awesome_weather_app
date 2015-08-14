@@ -39,6 +39,7 @@ group :development, :test do
   gem 'spring'                          # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'faker'                           # Generates all kinds of useful stuff for testing, e.g. IP/MAC addresses
   gem 'httparty'                        # Let's get the http party started!
+  gem 'countries'                       # Collection of all sorts of useful information for every country in the ISO 3166 standard
 end
 
 group :test do
