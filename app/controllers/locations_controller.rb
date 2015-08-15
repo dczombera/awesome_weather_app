@@ -14,28 +14,36 @@ class LocationsController < ApplicationController
       return
     end
 
-    @location = begin
-      unit = params["unit"]["value"]
-
+    unit = params["unit"]["value"]
+    # Let's create the propery URL for the api call
+    api_call = begin
       if params[:commit] == 'Search'
-        # Get country code of country using countries gem
-        # If country is blank nil is returned by Country
         country_code = Country.find_country_by_name(params[:location][:country]).try(:alpha2)
-        response = HTTParty.get(URL_BASE + "?q=#{params[:location][:city]},#{country_code}&units=#{unit}")
-        # Set unit type for temperature
-        response["unit"] = convert_to_unit_of_measurement(unit)
-        # Create new location object if api request succeeded
-        response["cod"] == 200 ? build_location(response) : nil
+        URL_BASE + "?q=#{params[:location][:city]},#{country_code}&units=#{unit}"
       else
-        create_random_location(unit)
+        URL_BASE + "?lat=#{Faker::Address::latitude}&lon=#{Faker::Address::longitude}&units=#{unit}"
       end
     end
-    # We assume the city was not found because we didn't particularly check for a response code of 404
-    if @location.nil?
+
+    # Call Open Weather Map API
+    response = HTTParty.get(api_call)
+
+    if response["cod"] == 200
+      response["unit"] = convert_to_unit_of_measurement(unit)
+      @location = build_location(response)
+    # Show flash message when city wasn't found. Api returns response code as string.
+    elsif response["cod"] == "404"
       flash[:danger] = "Sorry, my friend. I did my best but I couldn't find the city."
       redirect_to root_url
-    elsif @location.save
-      # Get last search results used in view
+      return
+    else
+      flash[:danger] = "Opps. Something went wrong. Please try again!"
+      redirect_to root_url
+      return
+    end
+
+    if @location.save
+      # Get last search results used in view to show search history
       @history = get_search_history
       render :index
     else
@@ -43,15 +51,4 @@ class LocationsController < ApplicationController
       redirect_to root_url
     end
   end
-
-  private
-
-    def create_random_location(unit)
-      # Create url for api call using random geographic coordinates
-      api_call = URL_BASE + "?lat=#{Faker::Address::latitude}&lon=#{Faker::Address::longitude}&units=#{unit}"
-      response = HTTParty.get(api_call)
-      response["unit"] = convert_to_unit_of_measurement(unit)
-      location = response["cod"] == 200 ? build_location(response) : nil
-      location
-    end
 end
