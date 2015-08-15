@@ -13,6 +13,7 @@ RSpec.describe LocationsController, type: :request do
       let(:search_params) do
         {
             location: { city: "Berlin", country: "Germany"},
+            unit: { value: "metric" },
             commit: "Search"
         }
       end
@@ -33,12 +34,12 @@ RSpec.describe LocationsController, type: :request do
 
       it "creates new record" do
         expect {
-          post "/locations", commit: "random"
+          post "/locations", commit: "random", unit: { value: "metric" }
         }.to change(Location, :count).by(1)
       end
 
       it "renders partial" do
-        post "/locations", commit: "random"
+        post "/locations", commit: "random", unit: { value: "metric" }
         expect(response).to render_template(partial: "_location")
       end
     end
@@ -47,7 +48,8 @@ RSpec.describe LocationsController, type: :request do
       let(:search_params) do
         {
           location: { city: "__", country: ""},
-          commit: "Search"
+          commit: "Search",
+          unit: { value: "metric" },
         }
       end
       it "doesn't create new record" do
@@ -58,7 +60,8 @@ RSpec.describe LocationsController, type: :request do
 
       it "shows flash message" do
         post "/locations", search_params
-        expect(flash.now[:danger]).to be_present
+        expect(response).to redirect_to root_path
+        expect(flash[:danger]).to be_present
       end
     end
 
@@ -77,7 +80,8 @@ RSpec.describe LocationsController, type: :request do
 
       it "shows flash message" do
         post "/locations", search_params
-        expect(flash.now[:danger]).to be_present
+        expect(response).to redirect_to root_path
+        expect(flash[:danger]).to be_present
       end
     end
   end
