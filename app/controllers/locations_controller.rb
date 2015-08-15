@@ -15,15 +15,19 @@ class LocationsController < ApplicationController
     end
 
     @location = begin
+      unit = params["unit"]["value"]
+
       if params[:commit] == 'Search'
         # Get country code of country using countries gem
         # If country is blank nil is returned by Country
         country_code = Country.find_country_by_name(params[:location][:country]).try(:alpha2)
-        response = HTTParty.get(URL_BASE + "?q=#{params[:location][:city]},#{country_code}")
+        response = HTTParty.get(URL_BASE + "?q=#{params[:location][:city]},#{country_code}&units=#{unit}")
+        # Set unit type for temperature
+        response["unit"] = convert_to_unit_of_measurement(unit)
         # Create new location object if api request succeeded
         response["cod"] == 200 ? build_location(response) : nil
       else
-        create_random_location
+        create_random_location(unit)
       end
     end
     # We assume the city was not found because we didn't particularly check for a response code of 404
@@ -42,10 +46,11 @@ class LocationsController < ApplicationController
 
   private
 
-    def create_random_location
+    def create_random_location(unit)
       # Create url for api call using random geographic coordinates
-      api_call = URL_BASE + "?lat=#{Faker::Address::latitude}&lon=#{Faker::Address::longitude}"
+      api_call = URL_BASE + "?lat=#{Faker::Address::latitude}&lon=#{Faker::Address::longitude}&units=#{unit}"
       response = HTTParty.get(api_call)
+      response["unit"] = convert_to_unit_of_measurement(unit)
       location = response["cod"] == 200 ? build_location(response) : nil
       location
     end

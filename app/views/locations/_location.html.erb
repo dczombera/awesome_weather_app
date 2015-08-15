@@ -1,15 +1,13 @@
 <h3> Location and Weather result</h3>
 <ul class="search_history">
-  <% unless @location.nil? %>
-      <div class="history_record">
-        <li><strong>City:</strong> <%= "#{@location.city}" %></li>
-        <li><strong>Country:</strong> <%= "#{@location.country}" %></li>
-        <li><strong>Weather description:</strong> <%= "#{@location.description}" %></li>
-        <li><strong>Temperature:</strong> <%= "#{@location.temp}" %></li>
-        <li><strong>Humidity:</strong> <%= "#{@location.humidity}" %></li>
-        <li><strong>Wind speed:</strong> <%= "#{@location.wind_speed}" %></li>
-      </div>
-  <% end %>
+  <div class="history_record">
+    <li><strong>City:</strong> <%= "#{@location.city}" %></li>
+    <li><strong>Country:</strong> <%= "#{@location.country}" %></li>
+    <li><strong>Weather description:</strong> <%= "#{@location.description}" %></li>
+    <li><strong>Temperature:</strong> <%= "#{@location.temp} #{@location.unit}" %></li>
+    <li><strong>Humidity:</strong> <%= "#{@location.humidity}" %></li>
+    <li><strong>Wind speed:</strong> <%= "#{@location.wind_speed}" %></li>
+  </div>
 </ul>
 <p>
   <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@location.latitude}%2C#{@location.longitude}", class: "maps" %>

@@ -10,6 +10,7 @@ module LocationHelper
         longitude: attr["coord"]["lon"],
         description: attr["weather"].first["description"],
         temp: attr["main"]["temp"],
+        unit: attr["unit"],
         humidity: attr["main"]["humidity"],
         wind_speed: attr["wind"]["speed"]
         )
@@ -17,5 +18,10 @@ module LocationHelper
 
   def get_search_history(limit=5)
     Location.order('created_at DESC').limit(limit)
+  end
+
+  # Converts unit scale to unit of measurement
+  def convert_to_unit_of_measurement(unit)
+    unit.blank? ? "Kelvin" : {"metric" => "Celsius", "imperial" => "Fahrenheit"}[unit]
   end
 end

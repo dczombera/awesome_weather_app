@@ -18,8 +18,8 @@ ActiveRecord::Schema.define(version: 20150814162853) do
   enable_extension "hstore"
 
   create_table "locations", force: :cascade do |t|
-    t.string   "city",       null: false
-    t.string   "country",    null: false
+    t.string   "city"
+    t.string   "country"
     t.float    "latitude",   null: false
     t.float    "longitude",  null: false
     t.hstore   "weather"
