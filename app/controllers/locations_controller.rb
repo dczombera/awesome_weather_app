@@ -47,7 +47,7 @@ class LocationsController < ApplicationController
       @history = get_search_history
       render :index
     else
-      flash[:danger] = "Seems like something went wrong while saving to our database. Please try again!"
+      flash[:danger] = "Seems like something went wrong. Please try again!"
       redirect_to root_url
     end
   end

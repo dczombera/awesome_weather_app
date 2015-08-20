@@ -50,6 +50,12 @@ group :development do
   gem 'guard-rspec'                       # Watches code files & executes tests
 end
 
+# Deployment
+# ==================
+group :production do
+  gem 'rails_12factor'
+end
+
 
 
 

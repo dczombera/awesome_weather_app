@@ -1,28 +1,35 @@
-== README
+# Awesome weather app
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Small weather app to experiment with [OpenWeatherMap's API](http://openweathermap.org/)
 
-Things you may want to cover:
+*************
+Current status of the web app: [deployment on heroku](https://agile-plains-7113.herokuapp.com/)
 
-* Ruby version
+*************
 
-* System dependencies
+### Application configuration:
 
-* Configuration
+```
+Ruby version: 2.2.0
+Rails version: 4.2.3
+Database: PostgreSQL
+Test Suite: RSpec
+```
 
-* Database creation
+### Database initialization
 
-* Database initialization
+```
+rake db:create
+rake db:migrate
+```
 
-* How to run the test suite
+### How to run test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+```
+rake test
+```
+or for automatically running tests when a file was changed
+```
+guard
+```
 
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
