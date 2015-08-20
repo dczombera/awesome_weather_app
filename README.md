@@ -1,6 +1,6 @@
 # Awesome weather app
 
-Small weather app to experiment with [OpenWeatherMap's API](http://openweathermap.org/)
+Small weather app to experiment with [OpenWeatherMap's API](http://openweathermap.org/).
 
 *************
 Current status of the web app: [deployment on heroku](https://limitless-escarpment-6817.herokuapp.com/)
