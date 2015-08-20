@@ -8,7 +8,7 @@ RSpec.describe LocationsController, type: :request do
     end
   end
 
-  describe "GET #create" do
+  describe "POST #create" do
     context "search with valid params" do
       let(:search_params) do
         {

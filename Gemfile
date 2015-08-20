@@ -37,10 +37,11 @@ group :development, :test do
   gem 'byebug'                          # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'web-console', '~> 2.0'           # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'spring'                          # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'faker'                           # Generates all kinds of useful stuff for testing, e.g. IP/MAC addresses
-  gem 'httparty'                        # Let's get the http party started!
-  gem 'countries'                       # Collection of all sorts of useful information for every country in the ISO 3166 standard
 end
+
+gem 'faker'                           # Generates all kinds of useful stuff for testing, e.g. IP/MAC addresses
+gem 'httparty'                        # Let's get the http party started!
+gem 'countries'                       # Collection of all sorts of useful information for every country in the ISO 3166 standard
 
 group :test do
   gem 'shoulda-matchers', require: false # Shortcuts for testing model validations and more

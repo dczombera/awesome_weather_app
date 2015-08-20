@@ -26,7 +26,7 @@ rake db:migrate
 ### How to run test suite
 
 ```
-rake test
+bundle exec rspec
 ```
 or for automatically running tests when a file was changed
 ```
